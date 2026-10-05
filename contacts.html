@@ -1,55 +1,65 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Контактная информация учебного интернет-магазина.">
-  <title>Контакты – Учебный интернет-магазин</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Контактная информация учебного интернет-магазина.">
+    <title>Контакты – Учебный интернет-магазин</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header>
-    <div class="site-header">
-      <a class="site-logo" href="index.html">ShopProject</a>
-      <nav class="site-nav" aria-label="Основная навигация">
-        <ul class="site-nav__list">
-          <li><a href="index.html">Главная</a></li>
-          <li><a href="catalog.html">Каталог</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
-          <li><a href="index.html#advantages">Преимущества</a></li>
-          <li><a href="index.html#popular">Популярные товары</a></li>
-          <li><a href="index.html#contacts">Обратная связь</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
-      <a href="index.html">Главная</a>
-      <span>Контакты</span>
-    </nav>
+    <header class="site-header">
+        <h1>Учебный интернет-магазин</h1>
 
-    <section class="section">
-      <h1>Контакты</h1>
-      <p>Здесь размещается контактная информация учебного интернет-магазина.</p>
-      <ul>
-        <li>Телефон: +7 (900) 000-00-00</li>
-        <li>E-mail: info@example.com</li>
-        <li>Адрес: г. Москва, учебный проект</li>
-      </ul>
-    </section>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="product.html">Товар</a></li>
+                <li><a href="order.html">Заявка</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="index.html#advantages">Преимущества</a></li>
+                <li><a href="index.html#popular">Популярные товары</a></li>
+                <li><a href="index.html#contacts">Обратная связь</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section class="section" id="feedback">
-      <h2>Обратная связь</h2>
-      <p>Для отправки заявки используйте форму в модальном окне на главной странице.</p>
-      <a class="button" href="index.html#contacts">Перейти к форме</a>
-    </section>
-  </main>
+    <main>
 
-  <footer>
-    <p>&copy; 2026 Учебный проект. Все права защищены.</p>
-    <p>Дисциплина: Фронтенд и бэкенд разработка</p>
-  </footer>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="index.html">Главная</a>
+            <span>Контакты</span>
+        </nav>
+
+        <section class="section">
+            <h1>Контакты</h1>
+            <p>Здесь размещается контактная информация учебного интернет-магазина.</p>
+            <ul>
+                <li>Телефон: +7 (900) 000-00-00</li>
+                <li>E-mail: info@example.com</li>
+                <li>Адрес: г. Москва, учебный проект</li>
+            </ul>
+        </section>
+
+        <section class="section" id="feedback">
+            <h2>Обратная связь</h2>
+            <p>Для отправки заявки используйте отдельную страницу формы или модальное окно на главной.</p>
+            <div class="form-actions">
+                <a class="button" href="order.html">Перейти к форме заявки</a>
+                <a class="button button--secondary" href="index.html#popular">К товарам</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contacts">
+        <p>&copy; 2026 Учебный проект. Смысловых Михаил Геннадьевич ЭФБО-03-25</p>
+    </footer>
+
+    <a class="to-top" href="#" aria-label="Наверх">↑</a>
+
 </body>
 </html>

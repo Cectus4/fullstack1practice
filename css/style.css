@@ -107,6 +107,18 @@ a:focus-visible {
     cursor: not-allowed;
 }
 
+/* Вторая кнопка — второстепенная */
+.button--secondary {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.button--secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
 /* Навигация через Flexbox */
 .site-nav__list {
     display: flex;
@@ -152,8 +164,9 @@ a:focus-visible {
     margin-top: 0;
 }
 
-/* Карточка товара — flex-контейнер */
+/* Карточка товара — flex-контейнер, relative для бейджа */
 .product-card {
+    position: relative;
     margin-bottom: 0;
     padding: var(--space-md);
     border: 1px solid var(--color-border);
@@ -169,14 +182,44 @@ a:focus-visible {
     border-color: var(--color-primary);
 }
 
-.product-card h3 {
+.product-card__title {
     margin-top: 0;
 }
 
-/* Кнопка внутри карточки прижимается к низу */
-.product-card .button {
+.product-card__price {
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.product-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
     margin-top: auto;
-    align-self: flex-start;
+}
+
+/* Бейдж «Хит» / «Новинка» / «Скидка» */
+.product-card__badge {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    z-index: 2;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-card--discount .product-card__badge {
+    background-color: var(--color-danger);
+}
+
+.product-card--new .product-card__badge {
+    background-color: var(--color-success);
 }
 
 /* Сетка карточек товаров через CSS Grid */
@@ -257,6 +300,7 @@ a:focus-visible {
 
 .form-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-md);
     margin-top: var(--space-lg);
 }
@@ -270,10 +314,10 @@ a:focus-visible {
 }
 
 /* ===================================
-   6. Многостраничная навигация (ПР №5)
+   6. Многостраничная навигация
    =================================== */
 
-/* Хлебные крошки на внутренних страницах */
+/* Хлебные крошки */
 .breadcrumbs {
     max-width: var(--container-width);
     margin: 0 auto var(--space-md);
@@ -290,13 +334,15 @@ a:focus-visible {
     color: var(--color-muted);
 }
 
-/* Подсветка раздела, к которому перешли по якорю */
+/* Подсветка цели якоря */
 :target {
     outline: 2px dashed var(--color-primary);
     outline-offset: 4px;
 }
 
-/* Страница каталога: фильтры + товары */
+/* ===================================
+   7. Страница каталога: фильтры + товары
+   =================================== */
 .catalog-layout {
     max-width: var(--container-width);
     margin: 0 auto var(--space-xl);
@@ -304,6 +350,7 @@ a:focus-visible {
     grid-template-columns: 260px 1fr;
     grid-template-areas: "filters products";
     gap: var(--space-lg);
+    align-items: start;
 }
 
 .catalog-filters {
@@ -312,6 +359,12 @@ a:focus-visible {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background-color: var(--color-surface);
+
+    /* sticky-фильтр */
+    position: sticky;
+    top: var(--space-md);
+    max-height: calc(100vh - var(--space-xl));
+    overflow-y: auto;
 }
 
 .catalog-products {
@@ -346,4 +399,122 @@ a:focus-visible {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     font: inherit;
+}
+
+/* ===================================
+   8. Страница товара (product.html)
+   =================================== */
+.product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.product__media {
+    display: flex;
+    justify-content: center;
+}
+
+.product__image {
+    width: 100%;
+    height: auto;
+    max-width: 480px;
+    border-radius: var(--radius-md);
+    display: block;
+}
+
+.product__title {
+    margin-top: 0;
+}
+
+.product__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.product__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+/* ===================================
+   9. Таблица характеристик
+   =================================== */
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.spec-table caption {
+    caption-side: top;
+    text-align: left;
+    font-weight: 700;
+    padding: var(--space-sm) 0;
+    color: var(--color-muted);
+}
+
+.spec-table th,
+.spec-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+}
+
+.spec-table thead th {
+    background-color: var(--color-surface);
+    font-weight: 700;
+}
+
+.spec-table tbody th {
+    width: 40%;
+    font-weight: 400;
+    color: var(--color-muted);
+}
+
+.spec-table tbody tr:last-child th,
+.spec-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.spec-table tbody tr:hover {
+    background-color: var(--color-surface-accent);
+}
+
+/* ===================================
+   10. Кнопка «Наверх» (fixed + z-index)
+   =================================== */
+.to-top {
+    position: fixed;
+    right: var(--space-lg);
+    bottom: var(--space-lg);
+    z-index: 100;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.to-top:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+}
+
+.to-top:focus-visible {
+    outline: 2px solid var(--color-primary-dark);
+    outline-offset: 3px;
 }

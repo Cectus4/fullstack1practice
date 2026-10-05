@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Учебный интернет-магазин: популярные товары, преимущества и форма заявки.">
-    <title>Главная – Учебный интернет-магазин</title>
+    <meta name="description" content="Карточка товара учебного интернет-магазина: описание, характеристики, цена и форма заявки.">
+    <title>Товар 1 – Учебный интернет-магазин</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
 </head>
@@ -29,63 +29,68 @@
 
     <main>
 
-        <section class="hero">
-            <h2>Добро пожаловать!</h2>
-            <p>Это учебный проект для отработки навыков фронтенд-разработки.</p>
-        </section>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="index.html">Главная</a>
+            <span>Каталог</span>
+            <span>Товар 1</span>
+        </nav>
 
-        <section class="section" id="advantages">
-            <h2>Преимущества проекта</h2>
-            <p>Учебный проект позволяет отработать вёрстку, работу с формами, валидацию и взаимодействие с DOM.</p>
-        </section>
-
-        <section class="section" id="popular">
-            <h2>Популярные товары</h2>
-
-            <div class="products-grid">
-                <article class="product-card product-card--discount">
+        <section class="section product">
+            <div class="product__media">
+                <div class="product-card product-card--discount">
                     <span class="product-card__badge">Хит</span>
-                    <h3 class="product-card__title">Товар 1</h3>
-                    <p class="product-card__description">Краткое описание учебного товара.</p>
-                    <p class="product-card__price">Цена: 1000 руб.</p>
-                    <div class="product-card__actions">
-                        <a class="button button--secondary" href="product.html">Подробнее</a>
-                        <button class="button product-card__button" type="button" data-product="Товар 1">
-                            Заказать
-                        </button>
-                    </div>
-                </article>
-
-                <article class="product-card">
-                    <h3 class="product-card__title">Товар 2</h3>
-                    <p class="product-card__description">Краткое описание учебного товара.</p>
-                    <p class="product-card__price">Цена: 2000 руб.</p>
-                    <div class="product-card__actions">
-                        <a class="button button--secondary" href="product.html">Подробнее</a>
-                        <button class="button product-card__button" type="button" data-product="Товар 2">
-                            Заказать
-                        </button>
-                    </div>
-                </article>
-
-                <article class="product-card product-card--new">
-                    <span class="product-card__badge">Новинка</span>
-                    <h3 class="product-card__title">Товар 3</h3>
-                    <p class="product-card__description">Краткое описание учебного товара.</p>
-                    <p class="product-card__price">Цена: 3000 руб.</p>
-                    <div class="product-card__actions">
-                        <a class="button button--secondary" href="product.html">Подробнее</a>
-                        <button class="button product-card__button" type="button" data-product="Товар 3">
-                            Заказать
-                        </button>
-                    </div>
-                </article>
+                    <img class="product__image"
+                         src="images/6ab459238b0c11eea1ba3abd0be4d755_upscaled.jfif"
+                         alt="Учебный товар 1"
+                         width="600" height="400">
+                </div>
             </div>
+
+            <div class="product__info">
+                <h1 class="product__title">Товар 1</h1>
+                <p class="product__description">
+                    Краткое описание учебного товара. Здесь можно рассказать о назначении,
+                    особенностях и преимуществах товара или услуги.
+                </p>
+
+                <p class="product__price">Цена: 1000 руб.</p>
+
+                <div class="product__actions">
+                    <button class="button product-card__button"
+                            type="button"
+                            data-product="Товар 1">
+                        Заказать
+                    </button>
+                    <a class="button button--secondary" href="order.html">Оформить на странице заявки</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Характеристики товара</h2>
+
+            <table class="spec-table">
+                <caption>Технические характеристики учебного товара</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Параметр</th>
+                        <th scope="col">Значение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Артикул</th><td>SKU-001</td></tr>
+                    <tr><th scope="row">Категория</th><td>Учебные товары</td></tr>
+                    <tr><th scope="row">Материал</th><td>Учебный материал</td></tr>
+                    <tr><th scope="row">Вес</th><td>1 кг</td></tr>
+                    <tr><th scope="row">Гарантия</th><td>12 месяцев</td></tr>
+                    <tr><th scope="row">Наличие</th><td>На складе</td></tr>
+                </tbody>
+            </table>
         </section>
 
         <aside class="aside-info">
             <h2>Дополнительная информация</h2>
-            <p>Здесь может быть размещена полезная информация для пользователей.</p>
+            <p>Здесь может быть размещена полезная информация о доставке, оплате или условиях возврата.</p>
         </aside>
 
     </main>
