@@ -258,12 +258,18 @@ main {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
   padding: var(--space-xl);
-  /* Фоновое фото + затемняющая подложка для читаемости текста.
-     Если файла images/hero-bg.jpg нет, остаётся цвет --color-hero-bg. */
+  /* Фоновое фото (.hero) + затемняющая подложка для читаемости текста.
+     Затемнение плотнее слева, где расположены заголовок и кнопка.
+     Если файла images/backgrownd.jpg нет, остаётся цвет --color-hero-bg. */
   background-color: var(--color-hero-bg);
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
-    url('../images/hero-bg.jpg');
+    linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.88) 0%,
+      rgba(15, 23, 42, 0.7) 45%,
+      rgba(15, 23, 42, 0.45) 100%
+    ),
+    url('../images/backgrownd.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
