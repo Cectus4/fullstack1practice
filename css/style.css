@@ -16,6 +16,7 @@
   --color-white: #ffffff;
   --color-footer-bg: #0f172a;
   --color-footer-text: #cbd5e1;
+  --color-hero-bg: #0f172a;
 
   --space-xs: 6px;
   --space-sm: 10px;
@@ -257,10 +258,19 @@ main {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
   padding: var(--space-xl);
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+  /* Фоновое фото + затемняющая подложка для читаемости текста.
+     Если файла images/hero-bg.jpg нет, остаётся цвет --color-hero-bg. */
+  background-color: var(--color-hero-bg);
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
+    url('../images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--color-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
+  overflow: hidden;
 }
 
 .hero__title {
