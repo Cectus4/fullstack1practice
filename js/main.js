@@ -1,162 +1,377 @@
-// ===================================
-// 1. Модальное окно
-// ===================================
-const orderDialog = document.getElementById('order-dialog');
-const orderButtons = document.querySelectorAll('.product-card__button');
-const closeDialogButton = document.getElementById('close-order-dialog');
-const selectedProductInput = document.getElementById('selected-product');
-const orderForm = document.getElementById('order-form');
-const successMessage = document.getElementById('success-message');
-
-if (orderDialog && orderButtons.length && closeDialogButton) {
-    orderButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (selectedProductInput) {
-                selectedProductInput.value = button.dataset.product || '';
-            }
-            orderDialog.showModal();
-        });
-    });
-
-    closeDialogButton.addEventListener('click', () => {
-        orderDialog.close();
-    });
-}
-
-if (orderForm) {
-    orderForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const formElements = Array.from(orderForm.elements);
-        formElements.forEach((el) => {
-            if (el.willValidate) el.removeAttribute('aria-invalid');
-        });
-
-        if (!orderForm.checkValidity()) {
-            formElements.forEach((el) => {
-                if (el.willValidate && !el.checkValidity()) {
-                    el.setAttribute('aria-invalid', 'true');
-                }
-            });
-            orderForm.reportValidity();
-            return;
-        }
-
-        if (successMessage) successMessage.hidden = false;
-        orderForm.reset();
-        if (orderDialog) orderDialog.close();
-    });
-}
-
-// ===================================
-// 2. Форма на отдельной странице order.html
-// ===================================
-const orderFormPage = document.getElementById('order-form-page');
-const successMessagePage = document.getElementById('success-message-page');
-
-if (orderFormPage) {
-    orderFormPage.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const formElements = Array.from(orderFormPage.elements);
-        formElements.forEach((el) => {
-            if (el.willValidate) el.removeAttribute('aria-invalid');
-        });
-
-        if (!orderFormPage.checkValidity()) {
-            formElements.forEach((el) => {
-                if (el.willValidate && !el.checkValidity()) {
-                    el.setAttribute('aria-invalid', 'true');
-                }
-            });
-            orderFormPage.reportValidity();
-            return;
-        }
-
-        if (successMessagePage) {
-            successMessagePage.hidden = false;
-            successMessagePage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        orderFormPage.reset();
-    });
-}
-
-// ===================================
-// 3. Страница товара: подстановка данных по ?id=
-// ===================================
+/* ===============================
+   1. Данные товаров
+   =============================== */
 const PRODUCTS = {
-    "1": {
-        title: "Орущий чел",
-        description: "Громкий товар для громких покупок. Орущий чел — идеальный выбор для тех, кто хочет выразить свои эмоции максимально громко.",
-        price: "Цена: 2 руб.",
-        image: "images/img2.jpg",
-        alt: "Орущий чел",
-        badge: "Хит",
-        badgeClass: "product-card--discount"
-    },
-    "2": {
-        title: "Как я после 15 октября",
-        description: "Состояние, знакомое каждому. Товар для тех, кто понимает.",
-        price: "Цена: 8 $",
-        image: "images/img1.jpg",
-        alt: "Как я после 15 октября",
-        badge: "Новинка",
-        badgeClass: "product-card--new"
-    },
-    "3": {
-        title: "Угарный пхп чувак",
-        description: "Товар для настоящих backend-разработчиков. PHP — это не диагноз, это образ жизни.",
-        price: "Цена: 999 руб.",
-        image: "images/img2.jfif",
-        alt: "Угарный пхп чувак",
-        badge: "",
-        badgeClass: ""
-    }
-};
+  1: {
+    title: 'Орущий чел',
+    description:
+      'Громкий товар для громких покупок. Орущий чел — идеальный выбор для тех, кто хочет выразить свои эмоции максимально громко.',
+    price: 'Цена: 2 руб.',
+    image: 'images/img2.jpg',
+    alt: 'Орущий чел',
+    badge: 'Хит',
+    badgeClass: 'product-card--discount',
+    specs: [
+      ['Категория', 'Учебные товары'],
+      ['Артикул', 'SP-HIT-0001'],
+      ['Вес', '1 кг'],
+      ['Гарантия', '12 месяцев'],
+      ['Наличие', 'В наличии на складе'],
+    ],
+  },
+  2: {
+    title: 'Как я после 15 октября',
+    description:
+      'Состояние, знакомое каждому. Товар для тех, кто понимает и ценит учебную нагрузку середины семестра.',
+    price: 'Цена: 890 руб.',
+    image: 'images/img1.jpg',
+    alt: 'Как я после 15 октября',
+    badge: 'Новинка',
+    badgeClass: 'product-card--new',
+    specs: [
+      ['Категория', 'Учебные товары'],
+      ['Артикул', 'SP-NEW-0002'],
+      ['Вес', '0,8 кг'],
+      ['Гарантия', '12 месяцев'],
+      ['Наличие', 'Под заказ, 3 дня'],
+    ],
+  },
+  3: {
+    title: 'Угарный пхп чувак',
+    description:
+      'Товар для настоящих backend-разработчиков. PHP — это не диагноз, это образ жизни.',
+    price: 'Цена: 999 руб.',
+    image: 'images/img3.jpg',
+    alt: 'Угарный пхп чувак',
+    badge: 'Выбор редакции',
+    badgeClass: 'product-card--featured',
+    specs: [
+      ['Категория', 'Учебные товары'],
+      ['Артикул', 'SP-BACK-0003'],
+      ['Вес', '1,2 кг'],
+      ['Гарантия', '12 месяцев'],
+      ['Наличие', 'В наличии на складе'],
+    ],
+  },
+}
 
-const productTitle = document.getElementById('product-title');
+/* ===============================
+   2. Общие утилиты
+   =============================== */
+
+/**
+ * Подсвечивает ошибочные поля формы и возвращает результат проверки.
+ * @param {HTMLFormElement} form
+ * @returns {boolean}
+ */
+const validateForm = (form) => {
+  const formElements = Array.from(form.elements)
+
+  formElements.forEach((element) => {
+    if (element.willValidate) {
+      element.removeAttribute('aria-invalid')
+    }
+  })
+
+  if (form.checkValidity()) {
+    return true
+  }
+
+  formElements.forEach((element) => {
+    if (element.willValidate && !element.checkValidity()) {
+      element.setAttribute('aria-invalid', 'true')
+    }
+  })
+
+  form.reportValidity()
+
+  return false
+}
+
+/**
+ * Показывает сообщение об успешной отправке формы.
+ * @param {HTMLElement | null} message
+ */
+const showSuccessMessage = (message) => {
+  if (!message) {
+    return
+  }
+
+  message.hidden = false
+  message.scrollIntoView({ behavior: 'smooth', block: 'center' })
+}
+
+/* ===============================
+   3. Модальное окно заявки (order-dialog)
+   =============================== */
+const orderDialog = document.getElementById('order-dialog')
+const orderButtons = document.querySelectorAll('.product-card__button')
+const closeDialogButton = document.getElementById('close-order-dialog')
+const selectedProductInput = document.getElementById('selected-product')
+const orderForm = document.getElementById('order-form')
+const successMessage = document.getElementById('success-message')
+
+if (orderDialog && orderButtons.length) {
+  orderButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (selectedProductInput) {
+        selectedProductInput.value = button.dataset.product || ''
+      }
+
+      if (successMessage) {
+        successMessage.hidden = true
+      }
+
+      orderDialog.showModal()
+    })
+  })
+}
+
+if (orderDialog && closeDialogButton) {
+  closeDialogButton.addEventListener('click', () => {
+    orderDialog.close()
+  })
+}
+
+// Закрытие по клику на затемнённую область вокруг окна
+if (orderDialog) {
+  orderDialog.addEventListener('click', (event) => {
+    if (event.target === orderDialog) {
+      orderDialog.close()
+    }
+  })
+}
+
+if (orderForm && orderDialog) {
+  orderForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    if (!validateForm(orderForm)) {
+      return
+    }
+
+    orderForm.reset()
+    orderDialog.close()
+    showSuccessMessage(successMessage)
+  })
+}
+
+/* ===============================
+   4. Форма на странице оформления заказа (order-page-form)
+   =============================== */
+const orderPageForm = document.getElementById('order-page-form')
+const pageProductSelect = document.getElementById('page-order-product')
+const pageTopicSelect = document.getElementById('page-order-topic')
+
+// Предзаполнение товара и темы при переходе с карточки товара (?id=1)
+if (pageProductSelect) {
+  const productId = new URLSearchParams(window.location.search).get('id')
+
+  if (productId && pageProductSelect.querySelector(`option[value="${productId}"]`)) {
+    pageProductSelect.value = productId
+
+    if (pageTopicSelect) {
+      pageTopicSelect.value = 'product'
+    }
+  }
+}
+
+if (orderPageForm) {
+  orderPageForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    if (!validateForm(orderPageForm)) {
+      return
+    }
+
+    orderPageForm.reset()
+    showSuccessMessage(successMessage)
+  })
+}
+
+/* ===============================
+   5. Страница товара (product-detail)
+   =============================== */
+const productTitle = document.getElementById('product-title')
+
+/**
+ * Заполняет таблицу характеристик товара.
+ * @param {HTMLElement | null} tableBody
+ * @param {string[][]} specs
+ */
+const renderSpecs = (tableBody, specs) => {
+  if (!tableBody) {
+    return
+  }
+
+  tableBody.replaceChildren()
+
+  specs.forEach(([name, value]) => {
+    const row = document.createElement('tr')
+    const rowHeader = document.createElement('th')
+    const cell = document.createElement('td')
+
+    rowHeader.scope = 'row'
+    rowHeader.textContent = name
+    cell.textContent = value
+
+    row.append(rowHeader, cell)
+    tableBody.append(row)
+  })
+}
 
 if (productTitle) {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id') || '1';
-    const product = PRODUCTS[id];
+  const productId = new URLSearchParams(window.location.search).get('id') || '1'
+  const product = PRODUCTS[productId] || PRODUCTS['1']
 
-    if (product) {
-        productTitle.textContent = product.title;
-        document.title = product.title + ' – Учебный интернет-магазин';
+  const crumb = document.getElementById('product-crumb')
+  const description = document.getElementById('product-description')
+  const price = document.getElementById('product-price')
+  const image = document.getElementById('product-image')
+  const badge = document.getElementById('product-badge')
+  const card = document.querySelector('.product-detail__card')
+  const orderButton = document.getElementById('product-order-button')
+  const orderLink = document.getElementById('product-order-link')
+  const specsTable = document.getElementById('product-specs')
 
-        const crumb = document.getElementById('product-crumb');
-        if (crumb) crumb.textContent = product.title;
+  productTitle.textContent = product.title
+  document.title = `${product.title} — ShopProject`
 
-        const descEl = document.getElementById('product-description');
-        if (descEl) descEl.textContent = product.description;
+  if (crumb) {
+    crumb.textContent = product.title
+  }
 
-        const priceEl = document.getElementById('product-price');
-        if (priceEl) priceEl.textContent = product.price;
+  if (description) {
+    description.textContent = product.description
+  }
 
-        const imgEl = document.getElementById('product-image');
-        if (imgEl) {
-            imgEl.src = product.image;
-            imgEl.alt = product.alt;
-        }
+  if (price) {
+    price.textContent = product.price
+  }
 
-        const badgeEl = document.getElementById('product-badge');
-        const wrapper = document.getElementById('product-badge-wrapper');
+  if (image) {
+    image.src = product.image
+    image.alt = product.alt
+  }
 
-        if (wrapper) {
-            wrapper.className = 'product-card ' + (product.badgeClass || '');
-        }
+  if (card) {
+    card.className = `product-detail__card product-card ${product.badgeClass}`.trim()
+  }
 
-        if (badgeEl) {
-            if (product.badge) {
-                badgeEl.textContent = product.badge;
-                badgeEl.hidden = false;
-            } else {
-                badgeEl.hidden = true;
-            }
-        }
+  if (badge) {
+    badge.textContent = product.badge
+    badge.hidden = !product.badge
+  }
 
-        const btn = document.getElementById('product-order-button');
-        if (btn) btn.dataset.product = product.title;
+  if (orderButton) {
+    orderButton.dataset.product = product.title
+  }
+
+  if (orderLink) {
+    orderLink.href = `order.html?id=${productId}`
+  }
+
+  renderSpecs(specsTable, product.specs)
+}
+
+/* ===============================
+   6. Фильтры каталога (catalog-filters)
+   =============================== */
+const filtersForm = document.getElementById('catalog-filters-form')
+
+if (filtersForm) {
+  const categoryInputs = Array.from(
+    filtersForm.querySelectorAll('input[name="category"]'),
+  )
+  const priceFromInput = document.getElementById('price-from')
+  const priceToInput = document.getElementById('price-to')
+  const cards = Array.from(document.querySelectorAll('.product-card'))
+  const emptyMessage = document.getElementById('catalog-empty')
+
+  const applyFilters = () => {
+    const selectedCategories = categoryInputs
+      .filter((input) => input.checked)
+      .map((input) => input.value)
+
+    const allSelected =
+      selectedCategories.length === 0 || selectedCategories.includes('all')
+
+    const priceFrom = Number.parseInt(priceFromInput?.value, 10)
+    const priceTo = Number.parseInt(priceToInput?.value, 10)
+
+    let visibleCount = 0
+
+    cards.forEach((card) => {
+      const category = card.dataset.category || ''
+      const cardPrice = Number.parseInt(card.dataset.price, 10)
+
+      const matchesCategory =
+        allSelected || selectedCategories.includes(category)
+
+      const matchesPriceFrom =
+        Number.isNaN(priceFrom) || cardPrice >= priceFrom
+      const matchesPriceTo = Number.isNaN(priceTo) || cardPrice <= priceTo
+
+      const isVisible = matchesCategory && matchesPriceFrom && matchesPriceTo
+
+      card.hidden = !isVisible
+
+      if (isVisible) {
+        visibleCount += 1
+      }
+    })
+
+    if (emptyMessage) {
+      emptyMessage.hidden = visibleCount > 0
     }
+  }
+
+  // «Все товары» и отдельные категории взаимоисключающие
+  categoryInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      if (!input.checked) {
+        return
+      }
+
+      if (input.value === 'all') {
+        categoryInputs.forEach((other) => {
+          if (other !== input) {
+            other.checked = false
+          }
+        })
+      } else {
+        categoryInputs.forEach((other) => {
+          if (other.value === 'all') {
+            other.checked = false
+          }
+        })
+      }
+    })
+  })
+
+  filtersForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    applyFilters()
+  })
+
+  filtersForm.addEventListener('change', applyFilters)
+
+  filtersForm.addEventListener('reset', () => {
+    // Сначала форма сбрасывается, затем пересчитываем результат
+    window.setTimeout(applyFilters, 0)
+  })
+
+  applyFilters()
+}
+
+/* ===============================
+   7. Кнопка «Наверх» (scroll-top-btn)
+   =============================== */
+const scrollTopButton = document.querySelector('.scroll-top-btn')
+
+if (scrollTopButton) {
+  scrollTopButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  })
 }
