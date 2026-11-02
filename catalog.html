@@ -1,133 +1,343 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Каталог товаров учебного интернет-магазина с фильтрами.">
-    <title>Каталог – Учебный интернет-магазин</title>
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Каталог учебного интернет-магазина ShopProject: фильтры по категории и цене, сетка карточек товаров."
+    />
+    <title>Каталог товаров — ShopProject</title>
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/main.js" defer></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <header class="site-header">
-        <h1>Учебный интернет-магазин</h1>
-
+      <div class="site-header__inner">
+        <a class="site-header__logo" href="index.html">ShopProject</a>
         <nav class="site-nav" aria-label="Основная навигация">
-            <ul class="site-nav__list">
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="product.html">Товар</a></li>
-                <li><a href="order.html">Заявка</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="index.html#advantages">Преимущества</a></li>
-                <li><a href="index.html#popular">Популярные товары</a></li>
-                <li><a href="index.html#contacts">Обратная связь</a></li>
-            </ul>
+          <ul class="site-nav__list">
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="site-nav__item">
+              <a
+                class="site-nav__link site-nav__link--active"
+                href="catalog.html"
+                >Каталог</a
+              >
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="product.html">Товар</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="order.html">Оформить заказ</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="contacts.html">Контакты</a>
+            </li>
+          </ul>
         </nav>
+      </div>
     </header>
 
     <main>
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a class="breadcrumbs__link" href="index.html">Главная</a>
+        <span class="breadcrumbs__current">Каталог</span>
+      </nav>
 
-        <nav class="breadcrumbs" aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a>
-            <span>Каталог</span>
-        </nav>
+      <section class="section">
+        <h1 class="section__title">Каталог товаров</h1>
+        <p class="section__text">
+          На этой странице представлен каталог учебного магазина: фильтры по
+          категории и цене слева, сетка карточек товаров справа.
+        </p>
+      </section>
 
-        <section class="section">
-            <h1>Каталог товаров</h1>
-            <p>На этой странице представлен учебный каталог товаров с фильтрами и сеткой карточек.</p>
+      <section class="catalog-layout">
+        <aside class="catalog-filters" aria-labelledby="catalog-filters-title">
+          <h2 class="catalog-filters__title" id="catalog-filters-title">
+            Фильтры
+          </h2>
+
+          <form class="filters-form" id="catalog-filters-form" action="#">
+            <fieldset class="filters-form__group">
+              <legend class="filters-form__legend">Категория</legend>
+              <label class="filters-form__label">
+                <input
+                  type="checkbox"
+                  name="category"
+                  value="all"
+                  checked
+                />
+                Все товары
+              </label>
+              <label class="filters-form__label">
+                <input type="checkbox" name="category" value="hit" />
+                Хиты
+              </label>
+              <label class="filters-form__label">
+                <input type="checkbox" name="category" value="new" />
+                Новинки
+              </label>
+            </fieldset>
+
+            <fieldset class="filters-form__group">
+              <legend class="filters-form__legend">Цена</legend>
+              <label class="filters-form__label" for="price-from">От, руб.</label>
+              <input
+                class="filters-form__input"
+                id="price-from"
+                name="price-from"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="0"
+              />
+              <label class="filters-form__label" for="price-to">До, руб.</label>
+              <input
+                class="filters-form__input"
+                id="price-to"
+                name="price-to"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="1000"
+              />
+            </fieldset>
+
+            <div class="filters-form__actions">
+              <button class="button button--primary" type="submit">
+                Применить
+              </button>
+              <button class="button button--secondary" type="reset">
+                Сбросить
+              </button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="catalog-products" aria-labelledby="catalog-products-title">
+          <h2 class="catalog-products__title" id="catalog-products-title">
+            Список товаров
+          </h2>
+
+          <div class="products-grid">
+            <article
+              class="product-card product-card--discount"
+              data-category="hit"
+              data-price="2"
+            >
+              <span class="product-card__badge">Хит</span>
+              <img
+                class="product-card__image"
+                src="images/img2.jpg"
+                alt="Орущий чел"
+                width="400"
+                height="260"
+              />
+              <h3 class="product-card__title">Орущий чел</h3>
+              <p class="product-card__description">
+                Громкий товар для громких покупок.
+              </p>
+              <p class="product-card__price">Цена: 2 руб.</p>
+              <div class="product-card__actions">
+                <a class="button button--secondary" href="product.html?id=1"
+                  >Подробнее</a
+                >
+                <button
+                  class="button button--primary product-card__button"
+                  type="button"
+                  data-product="Орущий чел"
+                >
+                  Заказать
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="product-card product-card--new"
+              data-category="new"
+              data-price="890"
+            >
+              <span class="product-card__badge">Новинка</span>
+              <img
+                class="product-card__image"
+                src="images/img1.jpg"
+                alt="Как я после 15 октября"
+                width="400"
+                height="260"
+              />
+              <h3 class="product-card__title">Как я после 15 октября</h3>
+              <p class="product-card__description">
+                Состояние, знакомое каждому.
+              </p>
+              <p class="product-card__price">Цена: 890 руб.</p>
+              <div class="product-card__actions">
+                <a class="button button--secondary" href="product.html?id=2"
+                  >Подробнее</a
+                >
+                <button
+                  class="button button--primary product-card__button"
+                  type="button"
+                  data-product="Как я после 15 октября"
+                >
+                  Заказать
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="product-card product-card--featured"
+              data-category="hit"
+              data-price="999"
+            >
+              <span class="product-card__badge">Выбор редакции</span>
+              <img
+                class="product-card__image"
+                src="images/img3.jpg"
+                alt="Угарный пхп чувак"
+                width="400"
+                height="260"
+              />
+              <h3 class="product-card__title">Угарный пхп чувак</h3>
+              <p class="product-card__description">
+                Товар для настоящих backend-разработчиков.
+              </p>
+              <p class="product-card__price">Цена: 999 руб.</p>
+              <div class="product-card__actions">
+                <a class="button button--secondary" href="product.html?id=3"
+                  >Подробнее</a
+                >
+                <button
+                  class="button button--primary product-card__button"
+                  type="button"
+                  data-product="Угарный пхп чувак"
+                >
+                  Заказать
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <p class="catalog-products__empty" id="catalog-empty" hidden>
+            По выбранным фильтрам товары не найдены. Измените категорию или
+            диапазон цены.
+          </p>
         </section>
+      </section>
 
-        <section class="catalog-layout">
-            <aside class="catalog-filters">
-                <h2>Фильтры</h2>
-
-                <form class="filters-form" action="#" method="get">
-                    <fieldset>
-                        <legend>Категория</legend>
-                        <label>
-                            <input type="checkbox" name="category" value="all">
-                            Все товары
-                        </label>
-                        <label>
-                            <input type="checkbox" name="category" value="popular">
-                            Популярные
-                        </label>
-                        <label>
-                            <input type="checkbox" name="category" value="new">
-                            Новинки
-                        </label>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Цена</legend>
-                        <label for="price-from">От</label>
-                        <input id="price-from" name="price-from" type="number" min="0" placeholder="0">
-
-                        <label for="price-to">До</label>
-                        <input id="price-to" name="price-to" type="number" min="0" placeholder="5000">
-                    </fieldset>
-
-                    <button class="button" type="submit">Применить</button>
-                </form>
-            </aside>
-
-            <section class="catalog-products">
-                <h2>Список товаров</h2>
-
-                <div class="products-grid">
-                    <article class="product-card product-card--discount">
-                        <span class="product-card__badge">Хит</span>
-                        <img class="product-card__image" src="images/img2.jpg" alt="Орущий чел" width="400" height="260">
-                        <h3 class="product-card__title">Орущий чел</h3>
-                        <p class="product-card__description">Громкий товар для громких покупок.</p>
-                        <p class="product-card__price">Цена: 2 руб.</p>
-                        <div class="product-card__actions">
-                            <a class="button button--secondary" href="product.html?id=1">Подробнее</a>
-                            <button class="button product-card__button" type="button" data-product="Орущий чел">
-                                Заказать
-                            </button>
-                        </div>
-                    </article>
-
-                    <article class="product-card product-card--new">
-                        <span class="product-card__badge">Новинка</span>
-                        <img class="product-card__image" src="images/img1.jpg" alt="Как я после 15 октября" width="400" height="260">
-                        <h3 class="product-card__title">Как я после 15 октября</h3>
-                        <p class="product-card__description">Состояние, знакомое каждому.</p>
-                        <p class="product-card__price">Цена: 8 $</p>
-                        <div class="product-card__actions">
-                            <a class="button button--secondary" href="product.html?id=2">Подробнее</a>
-                            <button class="button product-card__button" type="button" data-product="Как я после 15 октября">
-                                Заказать
-                            </button>
-                        </div>
-                    </article>
-
-                    <article class="product-card">
-                        <img class="product-card__image" src="images/img2.jfif" alt="Угарный пхп чувак" width="400" height="260">
-                        <h3 class="product-card__title">Угарный пхп чувак</h3>
-                        <p class="product-card__description">Товар для настоящих backend-разработчиков.</p>
-                        <p class="product-card__price">Цена: 999 руб.</p>
-                        <div class="product-card__actions">
-                            <a class="button button--secondary" href="product.html?id=3">Подробнее</a>
-                            <button class="button product-card__button" type="button" data-product="Угарный пхп чувак">
-                                Заказать
-                            </button>
-                        </div>
-                    </article>
-                </div>
-            </section>
-        </section>
-
+      <aside class="aside-info" aria-labelledby="catalog-advice-title">
+        <h2 class="aside-info__title" id="catalog-advice-title">
+          Подбор товара
+        </h2>
+        <p class="aside-info__text">
+          Не можете выбрать? Оставьте заявку с темой «Консультация» — менеджер
+          поможет подобрать товар под задачу и бюджет.
+        </p>
+      </aside>
     </main>
 
-    <footer id="contacts">
-        <p>&copy; 2026 Учебный проект. Смыслов Михаил Геннадьевич ЭФБО-03-25</p>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>&copy; 2026 Учебный интернет-магазин «ShopProject».</p>
+        <p>Дисциплина: Фронтенд и бэкенд разработка</p>
+      </div>
     </footer>
 
-    <a class="to-top" href="#" aria-label="Наверх">↑</a>
+    <a class="scroll-top-btn" href="#" aria-label="Наверх">↑</a>
 
-</body>
+    <dialog
+      class="order-dialog"
+      id="order-dialog"
+      aria-labelledby="order-dialog-title"
+    >
+      <h2 class="order-dialog__title" id="order-dialog-title">
+        Оформление заявки
+      </h2>
+      <form
+        class="order-form"
+        id="order-form"
+        action="#"
+        method="post"
+        novalidate
+      >
+        <input id="selected-product" name="selected-product" type="hidden" />
+
+        <div class="order-form__field">
+          <label class="order-form__label" for="order-name">Имя</label>
+          <input
+            class="order-form__input"
+            id="order-name"
+            name="name"
+            type="text"
+            placeholder="Введите ваше имя"
+            minlength="2"
+            autocomplete="given-name"
+            required
+          />
+        </div>
+
+        <div class="order-form__field">
+          <label class="order-form__label" for="order-email">E-mail</label>
+          <input
+            class="order-form__input"
+            id="order-email"
+            name="email"
+            type="email"
+            placeholder="example@mail.ru"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="order-form__field">
+          <label class="order-form__label" for="order-phone">Телефон</label>
+          <input
+            class="order-form__input"
+            id="order-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="+7 (900) 000-00-00"
+            pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+            autocomplete="tel"
+            required
+          />
+          <small class="order-form__help">Формат: +7 (900) 000-00-00</small>
+        </div>
+
+        <div class="order-form__field order-form__field--checkbox">
+          <label class="order-form__checkbox-label">
+            <input
+              class="order-form__checkbox"
+              id="order-agreement"
+              name="agreement"
+              type="checkbox"
+              required
+            />
+            Я согласен на обработку данных
+          </label>
+        </div>
+
+        <div class="order-form__actions">
+          <button
+            class="button button--secondary"
+            type="button"
+            id="close-order-dialog"
+          >
+            Закрыть
+          </button>
+          <button class="button button--primary" type="submit">
+            Отправить заявку
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <p class="success-message" id="success-message" hidden>
+      Форма успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.
+    </p>
+  </body>
 </html>

@@ -1,133 +1,218 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Оформление заявки в учебном интернет-магазине: форма обратной связи.">
-    <title>Оформление заявки – Учебный интернет-магазин</title>
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Страница оформления онлайн-заказа в учебном интернет-магазине ShopProject."
+    />
+    <title>Оформление заказа — ShopProject</title>
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/main.js" defer></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <header class="site-header">
-        <h1>Учебный интернет-магазин</h1>
-
+      <div class="site-header__inner">
+        <a class="site-header__logo" href="index.html">ShopProject</a>
         <nav class="site-nav" aria-label="Основная навигация">
-            <ul class="site-nav__list">
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="product.html">Товар</a></li>
-                <li><a href="order.html">Заявка</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="index.html#advantages">Преимущества</a></li>
-                <li><a href="index.html#popular">Популярные товары</a></li>
-                <li><a href="index.html#contacts">Обратная связь</a></li>
-            </ul>
+          <ul class="site-nav__list">
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="catalog.html">Каталог</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="product.html">Товар</a>
+            </li>
+            <li class="site-nav__item">
+              <a
+                class="site-nav__link site-nav__link--active"
+                href="order.html"
+                >Оформить заказ</a
+              >
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="contacts.html">Контакты</a>
+            </li>
+          </ul>
         </nav>
+      </div>
     </header>
 
     <main>
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a class="breadcrumbs__link" href="index.html">Главная</a>
+        <span class="breadcrumbs__current">Оформление заказа</span>
+      </nav>
 
-        <nav class="breadcrumbs" aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a>
-            <span>Оформление заявки</span>
-        </nav>
+      <section class="section order-page">
+        <h1 class="section__title">Оформление заказа</h1>
+        <p>
+          Заполните контактные данные и выберите товар — мы свяжемся с вами для
+          подтверждения заказа. Поля, отмеченные звёздочкой, обязательны.
+        </p>
 
-        <section class="section">
-            <h1>Оформление заявки</h1>
-            <p>
-                Заполните форму ниже — мы свяжемся с вами для подтверждения заказа
-                или консультации. Поля, отмеченные звёздочкой, обязательны.
-            </p>
+        <form
+          class="order-form order-form--page"
+          id="order-page-form"
+          action="#"
+          method="post"
+          novalidate
+        >
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-name"
+              >Имя *</label
+            >
+            <input
+              class="order-form__input"
+              id="page-order-name"
+              name="name"
+              type="text"
+              placeholder="Иван Иванов"
+              minlength="2"
+              autocomplete="given-name"
+              required
+            />
+          </div>
 
-            <form class="order-form" id="order-form-page" action="#" method="post" novalidate>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-email"
+              >E-mail *</label
+            >
+            <input
+              class="order-form__input"
+              id="page-order-email"
+              name="email"
+              type="email"
+              placeholder="ivanov@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
 
-                <div class="form-field">
-                    <label for="page-name">Имя *</label>
-                    <input id="page-name" name="name" type="text"
-                           placeholder="Введите ваше имя" minlength="2"
-                           autocomplete="given-name" required>
-                </div>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-phone"
+              >Номер телефона *</label
+            >
+            <input
+              class="order-form__input"
+              id="page-order-phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              placeholder="+7 (900) 000-00-00"
+              pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+              autocomplete="tel"
+              required
+            />
+            <small class="order-form__help">Формат: +7 (900) 000-00-00</small>
+          </div>
 
-                <div class="form-field">
-                    <label for="page-email">E-mail *</label>
-                    <input id="page-email" name="email" type="email"
-                           placeholder="example@mail.ru" autocomplete="email" required>
-                </div>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-date"
+              >Дата связи</label
+            >
+            <input
+              class="order-form__input"
+              id="page-order-date"
+              name="date"
+              type="date"
+            />
+          </div>
 
-                <div class="form-field">
-                    <label for="page-phone">Телефон *</label>
-                    <input id="page-phone" name="phone" type="tel" inputmode="tel"
-                           placeholder="+7 (900) 000-00-00"
-                           pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}" required>
-                    <small>Формат: +7 (900) 000-00-00</small>
-                </div>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-topic"
+              >Тема заявки *</label
+            >
+            <select
+              class="order-form__select"
+              id="page-order-topic"
+              name="topic"
+              required
+            >
+              <option value="">Выберите тему</option>
+              <option value="product">Заказ товара</option>
+              <option value="consultation">Консультация</option>
+              <option value="delivery">Доставка</option>
+            </select>
+          </div>
 
-                <div class="form-field">
-                    <label for="page-date">Дата связи</label>
-                    <input id="page-date" name="date" type="date">
-                </div>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-product"
+              >Выберите товар *</label
+            >
+            <select
+              class="order-form__select"
+              id="page-order-product"
+              name="product"
+              required
+            >
+              <option value="">-- Выберите товар из списка --</option>
+              <option value="1">Орущий чел (2 руб.)</option>
+              <option value="2">Как я после 15 октября (890 руб.)</option>
+              <option value="3">Угарный пхп чувак (999 руб.)</option>
+            </select>
+          </div>
 
-                <div class="form-field">
-                    <label for="page-topic">Тема заявки *</label>
-                    <select id="page-topic" name="topic" required>
-                        <option value="">Выберите тему</option>
-                        <option value="product">Заказ товара</option>
-                        <option value="consultation">Консультация</option>
-                        <option value="delivery">Доставка</option>
-                    </select>
-                </div>
+          <div class="order-form__field">
+            <label class="order-form__label" for="page-order-comment"
+              >Комментарий к доставке</label
+            >
+            <textarea
+              class="order-form__textarea"
+              id="page-order-comment"
+              name="comment"
+              rows="4"
+              placeholder="Укажите адрес доставки, подъезд и удобное время"
+            ></textarea>
+          </div>
 
-                <div class="form-field">
-                    <label for="page-product">Выбранный товар</label>
-                    <select id="page-product" name="product">
-                        <option value="">Не выбран</option>
-                        <option value="Орущий чел">Орущий чел</option>
-                        <option value="Как я после 15 октября">Как я после 15 октября</option>
-                        <option value="Угарный пхп чувак">Угарный пхп чувак</option>
-                    </select>
-                </div>
+          <div class="order-form__field order-form__field--checkbox">
+            <label class="order-form__checkbox-label">
+              <input
+                class="order-form__checkbox"
+                id="page-order-agreement"
+                name="agreement"
+                type="checkbox"
+                required
+              />
+              Я согласен на обработку персональных данных *
+            </label>
+          </div>
 
-                <div class="form-field">
-                    <label for="page-comment">Комментарий</label>
-                    <textarea id="page-comment" name="comment" rows="5"
-                              placeholder="Укажите дополнительную информацию"></textarea>
-                </div>
+          <div class="order-form__actions">
+            <button class="button button--primary" type="submit">
+              Подтвердить заказ
+            </button>
+            <a class="button button--secondary" href="index.html"
+              >Вернуться на главную</a
+            >
+          </div>
+        </form>
+      </section>
 
-                <div class="form-field form-field--checkbox">
-                    <label>
-                        <input id="page-agreement" name="agreement" type="checkbox" required>
-                        Я согласен на обработку персональных данных *
-                    </label>
-                </div>
+      <p class="success-message" id="success-message" hidden>
+        Заказ успешно оформлен! Мы свяжемся с вами в ближайшее время.
+      </p>
 
-                <div class="form-actions">
-                    <button class="button" type="submit">Отправить заявку</button>
-                    <a class="button button--secondary" href="index.html">Вернуться на главную</a>
-                </div>
-            </form>
-
-            <p class="success-message" id="success-message-page" hidden>
-                Форма успешно отправлена! Мы свяжемся с вами в ближайшее время.
-            </p>
-        </section>
-
-        <aside class="aside-info">
-            <h2>Как мы обрабатываем заявки</h2>
-            <p>
-                После отправки формы заявка попадает менеджеру. Обычно мы связываемся
-                в течение одного рабочего дня по указанным контактам.
-            </p>
-        </aside>
-
+      <aside class="aside-info">
+        <h2 class="aside-info__title">Как мы обрабатываем заявки</h2>
+        <p class="aside-info__text">
+          После отправки формы заявка попадает менеджеру. Обычно мы связываемся
+          в течение одного рабочего дня по указанным контактам.
+        </p>
+      </aside>
     </main>
 
-    <footer id="contacts">
-        <p>&copy; 2026 Учебный проект. Смыслов Михаил Геннадьевич ЭФБО-03-25</p>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>&copy; 2026 Учебный интернет-магазин «ShopProject».</p>
+        <p>Дисциплина: Фронтенд и бэкенд разработка</p>
+      </div>
     </footer>
 
-    <a class="to-top" href="#" aria-label="Наверх">↑</a>
-
-</body>
+    <a class="scroll-top-btn" href="#" aria-label="Наверх">↑</a>
+  </body>
 </html>
